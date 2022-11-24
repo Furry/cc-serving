@@ -11,7 +11,9 @@ Screen = {
         c.clear = Screen.clear;
         c.writeLine = Screen.writeLine;
         c.center = Screen.center;
-
+        c.warn = Screen.warn;
+        c.error = Screen.error;
+        c.log = Screen.log;
         c.newline = Screen.newline;
 
         return c
@@ -25,9 +27,28 @@ Screen = {
 
     writeLine = function (self, text, color)
         self.screen.write(text)
+
         self.x = 1
         self.y = self.y + 1
         self.screen.setCursorPos(self.x, self.y);
+    end,
+
+    error = function (self, text)
+        self.screen.setTextColor(colors.red)
+        self:writeLine(text)
+        self.screen.setTextColor(colors.white)
+    end,
+
+    warn = function (self, text)
+        self.screen.setTextColor(colors.yellow)
+        self:writeLine(text)
+        self.screen.setTextColor(colors.white)
+    end,
+
+    log = function (self, text)
+        self.screen.setTextColor(colors.green)
+        self:writeLine(text)
+        self.screen.setTextColor(colors.white)
     end,
 
     set = function(self, x, y)
@@ -93,6 +114,7 @@ Cursor = {
         -- Store the previous
         local prevx, prevy = self.screen.getCursorPos();
 
+        Cursor.clear(self)
         self.screen.setCursorPos(self.x, self.y)
         self.screen.write(text)
         self.x = self.x + string.len(text)
@@ -105,6 +127,7 @@ Cursor = {
         -- Store the previous
         local prevx, prevy = self.screen.getCursorPos();
 
+        Cursor.clear(self)
         local width, _ = self.screen.getSize();
         local x = math.floor(width / 2) - math.floor(string.len(text) / 2)
         self.screen.setCursorPos(x, self.y)

@@ -49,6 +49,19 @@ Tables = {
         return newTbl
     end,
 
+    sort = function (tbl, callable)
+        local copy = Tables.clone(tbl)
+        for i = 1, #tbl do
+            for j = 1, #tbl do
+                if callable(copy[i], copy[j]) then
+                    local temp = copy[i]
+                    copy[i] = copy[j]
+                    copy[j] = temp
+                end
+            end
+        end
+        return copy
+    end,
     --[[
     -- Prints a table.
     -- @param table tbl
@@ -116,9 +129,39 @@ Tables = {
         return tbl1
     end,
 
-    sort = function (tbl, callable)
-        local copy = Tables.clone(tbl)
-        table.sort(copy, callable)
-        return copy
+    push = function (tbl, value)
+        tbl[#tbl+1] = value
+        return tbl
     end,
+
+    range = function (start, stop)
+        local tbl = {}
+        for i = math.min(start, stop), math.max(start, stop) do
+            tbl[#tbl+1] = i
+        end
+        if start > stop then
+            tbl = Tables.reverse(tbl)
+        end
+        return tbl
+    end,
+
+    insert = function (tbl, value, index)
+        if index == nil then
+            return Tables.push(tbl, value)
+        end
+
+        local newTbl = {}
+        for i = 1, #tbl do
+            if i == index then
+                newTbl[#newTbl+1] = value
+            end
+            newTbl[#newTbl+1] = tbl[i]
+        end
+
+        return newTbl
+    end,
+
+    length = function (tbl)
+        return #tbl
+    end
 }

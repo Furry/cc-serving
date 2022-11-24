@@ -1,0 +1,112 @@
+{
+    "ic2:itemcable|1": {
+        "name": "Copper Cable",
+        "quantity": 6,
+        "recipe": {
+            "1": "ic2:itemmisc|450",
+            "2": "ic2:itemmisc|450",
+            "3": "ic2:itemmisc|450",
+            "4": "ic2:itemmisc|50",
+            "5": "ic2:itemmisc|50",
+            "6": "ic2:itemmisc|50",
+            "7": "ic2:itemmisc|450",
+            "8": "ic2:itemmisc|450",
+            "9": "ic2:itemmisc|450"
+        }
+    },
+    "ic2:itembatre|0": {
+        "name": "Battery",
+        "quantity": 1,
+        "recipe": {
+            "2": "ic2:itemcable|1",
+            "4": "ic2:itemmisc|51",
+            "5": "minecraft:redstone|0",
+            "6": "ic2:itemmisc|51",
+            "7": "ic2:itemmisc|51",
+            "8": "minecraft:redstone|0",
+            "9": "ic2:itemmisc|51"
+        }
+    },
+    "ic2:blockmachinelv|0": {
+        "name": "Machine Block",
+        "quantity": 1,
+        "recipe": {
+            "1": "ic2:itemmisc|53",
+            "2": "ic2:itemmisc|53",
+            "3": "ic2:itemmisc|53",
+            "4": "ic2:itemmisc|53",
+            "6": "ic2:itemmisc|53",
+            "7": "ic2:itemmisc|53",
+            "8": "ic2:itemmisc|53",
+            "9": "ic2:itemmisc|53"
+        }
+    },
+    "minecraft:furnace|0": {
+        "name": "Furnace",
+        "quantity": 1,
+        "recipe": {
+            "1": "minecraft:cobblestone|0",
+            "2": "minecraft:cobblestone|0",
+            "3": "minecraft:cobblestone|0",
+            "4": "minecraft:cobblestone|0",
+            "6": "minecraft:cobblestone|0",
+            "7": "minecraft:cobblestone|0",
+            "8": "minecraft:cobblestone|0",
+            "9": "minecraft:cobblestone|0"
+        }
+    },
+    "ic2:blockgenerator|0": {
+        "name": "Generator",
+        "quantity": 1,
+        "recipe": {
+            "2": "ic2:itembatre|0",
+            "5": "ic2:blockmachinelv|0",
+            "8": "minecraft:furnace|0"
+        }
+    },
+    "ic2:blockgenerator|2": {
+        "name": "Water Mill",
+        "quantity": 2,
+        "recipe": {
+            "1": "minecraft:stick|0",
+            "2": "minecraft:planks|1",
+            "3": "minecraft:stick|0",
+            "4": "minecraft:planks|1",
+            "5": "ic2:blockgenerator|0",
+            "6": "minecraft:planks|1",
+            "7": "minecraft:stick|0",
+            "8": "minecraft:planks|1",
+            "9": "minecraft:stick|0"
+        }
+    },
+    "ic2:blockelectric|8": {
+        "name": "LV-Transformer",
+        "quantity": 1,
+        "recipe": {
+            "1": "minecraft:planks|1",
+            "2": "ic2:itemcable|1",
+            "3": "minecraft:planks|1",
+            "4": "ic2:itemmisc|50",
+            "5": "ic2:itemmisc|50",
+            "6": "ic2:itemmisc|50",
+            "7": "minecraft:planks|1",
+            "8": "ic2:itemcable|1",
+            "9": "minecraft:planks|1"
+        }
+    },
+    "ic2:blockcompactedgenerator|3": {
+        "name": "Low Voltage Water Mill",
+        "quantity": 1,
+        "recipe": {
+            "1": "ic2:blockgenerator|2",
+            "2": "ic2:blockgenerator|2",
+            "3": "ic2:blockgenerator|2",
+            "4": "ic2:blockgenerator|2",
+            "5": "ic2:blockelectric|8",
+            "6": "ic2:blockgenerator|2",
+            "7": "ic2:blockgenerator|2",
+            "8": "ic2:blockgenerator|2",
+            "9": "ic2:blockgenerator|2"
+        }
+    }
+}

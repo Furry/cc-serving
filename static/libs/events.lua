@@ -18,5 +18,22 @@ Events = {
 
     clear = function (name)
         Events.events[name] = {}
+    end,
+
+    when = function (conditional, callback, ...)
+        while true do
+            if conditional() then
+                break;
+            end
+        end
+        callback(...)
+    end,
+
+    await = function (callback)
+        while true do
+            if callback() then
+                break;
+            end
+        end
     end
 }
