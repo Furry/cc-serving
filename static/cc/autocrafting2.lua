@@ -36,6 +36,7 @@ local function findInInventory(item, inventory)
 end
 
 local function find(item, ...)
+    local findStart = os.epoch("utc")
     local inventories = { ... }
 
     local damage = 0
@@ -47,16 +48,16 @@ local function find(item, ...)
 
     for i = 1, #inventories do
         local inv = inventories[i]
-        for k, v in pairs(inv:list()) do
-            if v.name == item and v.damage == damage then
-                return {
-                    inventory = inv,
-                    slot = k,
-                    drection = inv.direction
-                }
-            end
+        local pos = inv:fetch(item .. "|" .. damage)
+        if pos ~= nil then
+            return {
+                inventory = inv,
+                slot = pos,
+                direction = inv.direction
+            }
         end
     end
+    print("Didn't find " .. item .. " in " .. (os.epoch("utc") - findStart) .. "ms")
     return nil
 end
 
@@ -126,7 +127,6 @@ local function craft(item, count, output, ...)
 
         for k, v in pairs(entry.recipe) do
             if v ~= nil then
-                print("Finding " .. v)
                 local location = find(v, ...);
                 if location == nil then
                     if not craft(v, 1, output, ...) then
@@ -151,15 +151,22 @@ local function craft(item, count, output, ...)
 
         print("Discover Time: " .. (os.epoch("utc") - discoverStart) .. "ms")
         local moveStart = os.epoch("utc")
-        for _, v in ipairs(locations) do
-            v.location.inventory:push("bottom", v.location.slot, 1, Turtle.inventoryOffset(v.toSlot))
+
+        local craftProcesses = {}
+        for i, v in ipairs(locations) do
+            craftProcesses[i] = function ()
+                v.location.inventory:push("bottom", v.location.slot, 1, Turtle.inventoryOffset(v.toSlot))
+            end
         end
+        parallel.waitForAll(table.unpack(craftProcesses))
         print("Move Time: " .. (os.epoch("utc") - moveStart) .. "ms")
 
-        Events.emit("craftingStart", item)
+        local craftStart = os.epoch("utc")
+        Events.emit("craftingStart", entry.name)
         waitForCraft()
         output:pull("bottom", 1, 64)
-        Events.emit("craftingFinished", item)
+        Events.emit("craftingFinished", entry.name)
+        print("Craft Time: " .. (os.epoch("utc") - craftStart) .. "ms")
         if i == count then
             return true;
         end
@@ -257,12 +264,15 @@ local function startCraftOperation(item)
         screen:error(k .. " " .. v)
     end
 
+    -- error()
     -- If there's anything in the missing list, then we can't craft it.
     if Tables.length(results.missing) > 0 then
         screen:error("Missing items! Aborting.")
+        -- os.exit(-1);
         return false;
     end
 
+    print(3)
     for k, v in ipairs(results.craftingStack) do
         status:writeCenter("Crafting " .. v)
         craft(v, 1, 
@@ -297,4 +307,5 @@ local function startCraftOperation(item)
     status:writeCenter("Finished " .. item .. " in " .. (os.epoch("utc") - trueStart) .. "ms");
 end
 
-startCraftOperation("ic2:blockcompactedgenerator|3");
+-- startCraftOperation("ic2:blockcompactedgenerator|3");
+startCraftOperation("ic2:blockcompactedgenerator|4")

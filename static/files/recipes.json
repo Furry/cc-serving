@@ -108,5 +108,44 @@
             "8": "ic2:blockgenerator|2",
             "9": "ic2:blockgenerator|2"
         }
+    },
+    "ic2:itemcable|4": {
+        "name": "2xIns. Gold Cable",
+        "quantity": 4,
+        "recipe": {
+            "1": "ic2:itemmisc|450",
+            "2": "ic2:itemmisc|450",
+            "3": "ic2:itemmisc|450",
+            "4": "ic2:itemmisc|450",
+            "5": "minecraft:gold_ingot|0",
+            "6": "ic2:itemmisc|450",
+            "7": "ic2:itemmisc|450",
+            "8": "ic2:itemmisc|450",
+            "9": "ic2:itemmisc|450"
+        }
+    },
+    "ic2:blockelectric|9": {
+        "name": "MV-Transformer",
+        "quantity": 1,
+        "recipe": {
+            "2": "ic2:itemcable|4",
+            "5": "ic2:blockmachinelv|0",
+            "8": "ic2:itemcable|4"
+        }
+    },
+    "ic2:blockcompactedgenerator|4": {
+        "name": "Medium Voltage Water Mill (MV)",
+        "quantity": 1,
+        "recipe": {
+            "1": "ic2:blockcompactedgenerator|3",
+            "2": "ic2:blockcompactedgenerator|3",
+            "3": "ic2:blockcompactedgenerator|3",
+            "4": "ic2:blockcompactedgenerator|3",
+            "5": "ic2:blockelectric|9",
+            "6": "ic2:blockcompactedgenerator|3",
+            "7": "ic2:blockcompactedgenerator|3",
+            "8": "ic2:blockcompactedgenerator|3",
+            "9": "ic2:blockcompactedgenerator|3"
+        }
     }
 }

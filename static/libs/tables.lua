@@ -162,6 +162,51 @@ Tables = {
     end,
 
     length = function (tbl)
-        return #tbl
-    end
+        local i = 0
+        for k, v in pairs(tbl) do
+            i = i + 1
+        end
+        return i
+    end,
+
+    union = function (tbl1, tbl2)
+        local newTbl = {}
+        for k, v in pairs(tbl1) do
+            newTbl[k] = v
+        end
+        for k, v in pairs(tbl2) do
+            newTbl[k] = v
+        end
+        return newTbl
+    end,
+
+    difference = function (tbl1, tbl2)
+        local newTbl = {}
+        for k, v in pairs(tbl1) do
+            if not Tables.includes(tbl2, v) then
+                newTbl[k] = v
+            end
+        end
+        return newTbl
+    end,
+
+    remove = function (tbl, value)
+        local newTbl = {}
+        for k, v in pairs(tbl) do
+            if v ~= value then
+                newTbl[k] = v
+            end
+        end
+        return newTbl
+    end,
+
+    min = function (tbl)
+        local min = nil
+        for k, v in pairs(tbl) do
+            if min == nil or v < min then
+                min = v
+            end
+        end
+        return min
+    end,
 }
